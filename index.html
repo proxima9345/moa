@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="MoaPay — 한국 개발자를 위한 결제 인프라. 카카오페이, 네이버페이, 토스를 단 하나의 API로.">
+<meta property="og:title" content="MoaPay — 한국의 Stripe">
+<meta property="og:description" content="결제 연동, 이제 30분이면 충분합니다.">
+<meta property="og:image" content="https://moapay.dev/og-image.png">
+<title>MoaPay — 한국 개발자를 위한 결제 인프라</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="logo">
+      <div class="logo-mark">M</div>
+      <span class="logo-text">Moa<span class="logo-accent">Pay</span></span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#features">기능</a></li>
+      <li><a href="pages/docs.html">문서</a></li>
+      <li><a href="pages/pricing.html">요금제</a></li>
+      <li><a href="pages/demo.html">데모</a></li>
+    </ul>
+    <div class="nav-cta">
+      <a href="pages/login.html" class="btn btn-ghost">로그인</a>
+      <a href="pages/signup.html" class="btn btn-primary">무료 시작 →</a>
+    </div>
+    <button class="nav-hamburger" id="hamburger" aria-label="메뉴">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="nav-mobile" id="navMobile">
+    <a href="#features">기능</a>
+    <a href="pages/docs.html">문서</a>
+    <a href="pages/pricing.html">요금제</a>
+    <a href="pages/demo.html">데모</a>
+    <a href="pages/signup.html" class="btn btn-primary" style="margin-top:8px">무료 시작</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg-grid"></div>
+  <div class="container">
+    <div class="hero-badge" data-animate>
+      <span class="badge-dot"></span>
+      한국 개발자를 위한 결제 인프라
+    </div>
+    <h1 class="hero-title" data-animate>
+      결제 연동,<br>
+      <span class="grad">이제 30분이면</span><br>충분합니다
+    </h1>
+    <p class="hero-sub" data-animate>
+      카카오페이, 네이버페이, 토스, 전 카드사를 단 하나의 API로.<br>
+      ActiveX 없이. 공인인증서 없이. 복잡한 서류 없이.
+    </p>
+    <div class="hero-actions" data-animate>
+      <a href="pages/signup.html" class="btn btn-hero">무료로 시작하기</a>
+      <a href="pages/docs.html" class="btn btn-hero-ghost">API 문서 보기 →</a>
+    </div>
+    <div class="hero-code" data-animate>
+      <div class="code-card">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span></div>
+          <span class="code-title">빠른 시작 — Node.js</span>
+          <button class="copy-btn" onclick="copyCode(this)" data-code="npm install @moapay/node">복사</button>
+        </div>
+        <div class="code-body">
+<span class="cmt">// 1. 설치</span>
+<span class="kw">npm</span> install <span class="str">@moapay/node</span>
+
+<span class="cmt">// 2. 결제 생성 — 딱 이게 전부입니다</span>
+<span class="kw">import</span> Moa <span class="kw">from</span> <span class="str">'@moapay/node'</span>
+<span class="kw">const</span> moa = <span class="kw">new</span> <span class="fn">Moa</span>(<span class="str">'moa_live_...'</span>)
+
+<span class="kw">const</span> payment = <span class="kw">await</span> moa.payments.<span class="fn">create</span>({
+  <span class="prop">amount</span>: <span class="num">15000</span>,
+  <span class="prop">currency</span>: <span class="str">'KRW'</span>,
+  <span class="prop">method</span>: <span class="str">'kakaopay'</span>,
+})
+
+console.<span class="fn">log</span>(payment.<span class="prop">id</span>) <span class="cmt">// pay_xxxx ✓</span>
+        </div>
+      </div>
+    </div>
+    <div class="hero-stats" data-animate>
+      <div class="stat"><div class="stat-num">0.5%</div><div class="stat-label">업계 최저 수수료</div></div>
+      <div class="stat-divider"></div>
+      <div class="stat"><div class="stat-num">30분</div><div class="stat-label">평균 연동 시간</div></div>
+      <div class="stat-divider"></div>
+      <div class="stat"><div class="stat-num">99.99%</div><div class="stat-label">서비스 가용성</div></div>
+      <div class="stat-divider"></div>
+      <div class="stat"><div class="stat-num">8개+</div><div class="stat-label">SDK 지원 언어</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- PAYMENT METHODS -->
+<section class="pm-section">
+  <div class="container">
+    <p class="pm-label">지원하는 모든 결제수단</p>
+    <div class="pm-logos">
+      <div class="pm-pill">카카오페이</div>
+      <div class="pm-pill">네이버페이</div>
+      <div class="pm-pill">토스페이</div>
+      <div class="pm-pill">삼성페이</div>
+      <div class="pm-pill">신용카드</div>
+      <div class="pm-pill">체크카드</div>
+      <div class="pm-pill">계좌이체</div>
+      <div class="pm-pill">휴대폰결제</div>
+      <div class="pm-pill">문화상품권</div>
+      <div class="pm-pill">해피머니</div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="features" id="features">
+  <div class="container">
+    <div class="section-head">
+      <span class="section-label">핵심 기능</span>
+      <h2 class="section-title">Stripe처럼 쉽게,<br>한국처럼 완전하게</h2>
+    </div>
+    <div class="features-grid">
+      <a href="pages/docs.html#api" class="feat-card">
+        <div class="feat-icon feat-icon--purple">API</div>
+        <h3 class="feat-title">통합 PG 연동</h3>
+        <p class="feat-desc">KG이니시스, 나이스페이, KCP 등 국내 모든 PG사를 단일 API로. PG사 교체도 설정 한 줄.</p>
+        <span class="feat-link">자세히 보기 →</span>
+      </a>
+      <a href="pages/docs.html#simplePay" class="feat-card">
+        <div class="feat-icon feat-icon--teal">⚡</div>
+        <h3 class="feat-title">간편결제 원클릭</h3>
+        <p class="feat-desc">카카오페이·네이버페이·토스페이를 SDK 한 줄로. 토큰 처리, 결제창 호출 모두 자동화.</p>
+        <span class="feat-link">자세히 보기 →</span>
+      </a>
+      <a href="pages/docs.html#billing" class="feat-card">
+        <div class="feat-icon feat-icon--amber">↻</div>
+        <h3 class="feat-title">정기결제 & 구독</h3>
+        <p class="feat-desc">빌링키 발급, 재결제 실패 처리, 재시도 로직까지 자동. SaaS 구독 모델에 최적화.</p>
+        <span class="feat-link">자세히 보기 →</span>
+      </a>
+      <a href="pages/docs.html#radar" class="feat-card">
+        <div class="feat-icon feat-icon--coral">🛡</div>
+        <h3 class="feat-title">이상거래 탐지</h3>
+        <p class="feat-desc">머신러닝 기반 실시간 사기 탐지. PCI DSS Level 1 + 금융보안원 인증.</p>
+        <span class="feat-link">자세히 보기 →</span>
+      </a>
+      <a href="pages/docs.html#dashboard" class="feat-card">
+        <div class="feat-icon feat-icon--blue">📊</div>
+        <h3 class="feat-title">실시간 대시보드</h3>
+        <p class="feat-desc">매출·취소·환불을 실시간으로. Slack 알림, CSV 내보내기, 세금계산서 자동 발행.</p>
+        <span class="feat-link">자세히 보기 →</span>
+      </a>
+      <a href="pages/docs.html#errors" class="feat-card">
+        <div class="feat-icon feat-icon--green">✓</div>
+        <h3 class="feat-title">친절한 에러 메시지</h3>
+        <p class="feat-desc"><code>-8001</code> 같은 코드 하나로 끝나지 않습니다. 원인 분석과 해결 방법을 메시지에 포함.</p>
+        <span class="feat-link">자세히 보기 →</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="container">
+    <div class="cta-box">
+      <div class="cta-bg-grid"></div>
+      <h2 class="cta-title">지금 바로 시작하세요</h2>
+      <p class="cta-sub">무료 플랜으로 시작해서 성장에 따라 업그레이드. 신용카드 없이, 계약서 없이.</p>
+      <div class="cta-actions">
+        <a href="pages/signup.html" class="btn btn-hero">무료 계정 만들기</a>
+        <a href="pages/docs.html" class="btn btn-hero-ghost">문서 읽기</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="logo">
+          <div class="logo-mark">M</div>
+          <span class="logo-text">Moa<span class="logo-accent">Pay</span></span>
+        </a>
+        <p class="footer-tagline">한국 개발자를 위한<br>결제 인프라</p>
+      </div>
+      <div class="footer-col">
+        <h4>제품</h4>
+        <a href="pages/docs.html">Payments</a>
+        <a href="pages/docs.html#billing">Billing</a>
+        <a href="pages/docs.html#connect">Connect</a>
+        <a href="pages/docs.html#radar">Radar</a>
+      </div>
+      <div class="footer-col">
+        <h4>개발자</h4>
+        <a href="pages/docs.html">API 문서</a>
+        <a href="pages/docs.html#sdk">SDK</a>
+        <a href="pages/docs.html#webhook">웹훅</a>
+        <a href="pages/docs.html#changelog">변경 로그</a>
+      </div>
+      <div class="footer-col">
+        <h4>회사</h4>
+        <a href="#">소개</a>
+        <a href="#">블로그</a>
+        <a href="#">채용</a>
+        <a href="#">보안</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 MoaPay Inc.</span>
+      <span>사업자등록번호: 123-45-67890</span>
+      <a href="#">개인정보처리방침</a>
+      <a href="#">이용약관</a>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>

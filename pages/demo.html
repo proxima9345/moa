@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>결제 데모 — MoaPay</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/main.css">
+<style>
+.demo-layout{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start;max-width:860px;margin:0 auto;padding:48px 24px 80px}
+.checkout-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:32px}
+.checkout-title{font-size:17px;font-weight:600;margin-bottom:24px}
+.order-item{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid var(--border)}
+.item-name{font-size:14px;font-weight:500}
+.item-qty{font-size:12px;color:var(--text3);margin-top:2px}
+.item-price{font-size:14px;font-weight:600}
+.order-total{display:flex;justify-content:space-between;padding-top:16px;margin-top:8px;border-top:2px solid var(--border2);font-weight:700;font-size:16px}
+.form-group{margin-bottom:16px}
+.form-label{font-size:12px;color:var(--text2);margin-bottom:6px;display:block;font-weight:500;letter-spacing:0.3px}
+.form-input{width:100%;padding:11px 14px;background:var(--bg3);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:14px;font-family:'Noto Sans KR',sans-serif;outline:none;transition:border .2s}
+.form-input:focus{border-color:var(--accent)}
+.form-input::placeholder{color:var(--text3)}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.payment-tabs{display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap}
+.pm-tab{padding:8px 14px;border:1px solid var(--border);border-radius:8px;background:transparent;color:var(--text2);font-size:12px;font-weight:500;cursor:pointer;transition:all .2s;font-family:'Noto Sans KR',sans-serif}
+.pm-tab.active{border-color:var(--accent);color:var(--accent3);background:rgba(91,110,245,0.08)}
+.pay-btn{width:100%;padding:14px;background:var(--accent);border:none;border-radius:10px;color:#fff;font-size:15px;font-weight:600;cursor:pointer;transition:all .2s;font-family:'Noto Sans KR',sans-serif;margin-top:8px}
+.pay-btn:hover{background:var(--accent2);transform:translateY(-1px)}
+.pay-btn:disabled{opacity:.6;transform:none;cursor:not-allowed}
+.secure-note{text-align:center;margin-top:12px;font-size:12px;color:var(--text3)}
+.test-card-note{background:rgba(91,110,245,0.08);border:1px solid rgba(91,110,245,0.2);border-radius:8px;padding:12px 16px;font-size:12px;color:var(--text2);margin-bottom:20px;line-height:1.7}
+.test-card-note code{font-family:var(--mono);color:var(--accent3)}
+/* SUCCESS OVERLAY */
+.success-overlay{display:none;position:fixed;inset:0;background:rgba(10,10,15,0.85);z-index:9999;align-items:center;justify-content:center}
+.success-overlay.show{display:flex}
+.success-box{background:var(--surface);border:1px solid rgba(52,211,153,0.4);border-radius:20px;padding:48px 40px;text-align:center;max-width:380px;width:90%;animation:pop .3s ease}
+@keyframes pop{from{transform:scale(0.85);opacity:0}to{transform:scale(1);opacity:1}}
+.success-icon{font-size:52px;margin-bottom:18px}
+.success-title{font-size:22px;font-weight:700;margin-bottom:10px}
+.success-sub{font-size:14px;color:var(--text2);line-height:1.7;margin-bottom:20px}
+.tx-id{font-family:var(--mono);font-size:11px;color:var(--text3);background:var(--bg3);padding:8px 14px;border-radius:6px;margin-bottom:20px;word-break:break-all}
+@media(max-width:680px){.demo-layout{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="../index.html" class="logo">
+      <div class="logo-mark">M</div>
+      <span class="logo-text">Moa<span class="logo-accent">Pay</span></span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="../index.html#features">기능</a></li>
+      <li><a href="docs.html">문서</a></li>
+      <li><a href="pricing.html">요금제</a></li>
+      <li><a href="demo.html" style="color:var(--accent3)">데모</a></li>
+    </ul>
+    <div class="nav-cta">
+      <a href="login.html" class="btn btn-ghost">로그인</a>
+      <a href="signup.html" class="btn btn-primary">무료 시작 →</a>
+    </div>
+  </div>
+</nav>
+
+<div class="page-hero">
+  <div class="container">
+    <span class="section-label">라이브 데모</span>
+    <h1 class="page-title">Moa 결제창을<br>직접 체험하세요</h1>
+    <p class="page-sub">테스트 카드로 실제 결제 플로우를 경험해보세요. 실제 청구는 없습니다.</p>
+  </div>
+</div>
+
+<div class="demo-layout">
+  <!-- 주문 요약 -->
+  <div class="checkout-card">
+    <div class="checkout-title">주문 요약</div>
+    <div class="test-card-note">
+      테스트 카드: <code>4242 4242 4242 4242</code><br>
+      유효기간: <code>12/28</code> &nbsp; CVC: <code>123</code>
+    </div>
+    <div class="order-item">
+      <div><div class="item-name">프리미엄 멤버십 1개월</div><div class="item-qty">구독 상품</div></div>
+      <div class="item-price">₩9,900</div>
+    </div>
+    <div class="order-item">
+      <div><div class="item-name">AI 크레딧 100개</div><div class="item-qty">소모품</div></div>
+      <div class="item-price">₩4,500</div>
+    </div>
+    <div class="order-item">
+      <div><div class="item-name">배송비</div><div class="item-qty">3만원 이상 무료</div></div>
+      <div class="item-price" style="color:var(--green)">무료</div>
+    </div>
+    <div class="order-total"><span>합계</span><span>₩14,400</span></div>
+    <div style="margin-top:20px;padding:14px;background:var(--bg3);border-radius:8px;font-size:12px;color:var(--text3);line-height:1.7">
+      🔒 이 거래는 MoaPay의 256-bit SSL 암호화로 보호됩니다. 카드 정보는 서버에 저장되지 않습니다.
+    </div>
+  </div>
+
+  <!-- 결제 폼 -->
+  <div class="checkout-card">
+    <div class="checkout-title">결제 수단 선택</div>
+    <div class="payment-tabs">
+      <button class="pm-tab active" data-method="card" onclick="selectPayTab(this)">💳 카드</button>
+      <button class="pm-tab" data-method="kakaopay" onclick="selectPayTab(this)">카카오페이</button>
+      <button class="pm-tab" data-method="naverpay" onclick="selectPayTab(this)">네이버페이</button>
+      <button class="pm-tab" data-method="tosspay" onclick="selectPayTab(this)">토스</button>
+      <button class="pm-tab" data-method="bank" onclick="selectPayTab(this)">계좌이체</button>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">카드 번호</label>
+      <input class="form-input" placeholder="4242 4242 4242 4242" maxlength="19" oninput="formatCard(this)" style="font-family:var(--mono);letter-spacing:1px">
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label">유효기간</label>
+        <input class="form-input" placeholder="MM / YY" maxlength="7" oninput="formatExp(this)" style="font-family:var(--mono)">
+      </div>
+      <div class="form-group">
+        <label class="form-label">CVC</label>
+        <input class="form-input" placeholder="•••" maxlength="3" type="password">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="form-label">카드 소지자 이름</label>
+      <input class="form-input" placeholder="홍길동">
+    </div>
+
+    <button class="pay-btn" id="payBtn" data-amount="₩14,400" onclick="simulatePay()">₩14,400 결제하기</button>
+    <div class="secure-note">🔒 안전한 결제 — Powered by <strong style="color:var(--accent2)">MoaPay</strong></div>
+  </div>
+</div>
+
+<!-- 성공 오버레이 -->
+<div class="success-overlay" id="successOverlay">
+  <div class="success-box">
+    <div class="success-icon">✅</div>
+    <div class="success-title">결제 완료!</div>
+    <div class="success-sub">MoaPay를 통해 결제가 성공적으로 처리되었습니다. 영수증이 이메일로 발송됩니다.</div>
+    <div class="tx-id" id="txId">TX: pay_live_XXXXXXXXXXXXXXXX</div>
+    <button class="pay-btn" onclick="closeSuccess()">닫기</button>
+  </div>
+</div>
+
+<script src="../js/main.js"></script>
+</body>
+</html>

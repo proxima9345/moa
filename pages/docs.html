@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>API 문서 — MoaPay</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/main.css">
+<style>
+.docs-layout{display:grid;grid-template-columns:220px 1fr;gap:0;min-height:calc(100vh - 60px)}
+.docs-sidebar{border-right:1px solid var(--border);padding:32px 20px;position:sticky;top:60px;height:calc(100vh - 60px);overflow-y:auto}
+.docs-sidebar h4{font-size:11px;font-weight:600;color:var(--text3);letter-spacing:1px;text-transform:uppercase;margin:20px 0 8px}
+.docs-sidebar h4:first-child{margin-top:0}
+.docs-sidebar a{display:block;font-size:13px;color:var(--text2);padding:5px 10px;border-radius:6px;transition:all .2s;margin-bottom:1px}
+.docs-sidebar a:hover{color:var(--text);background:var(--surface)}
+.docs-sidebar a.active{color:var(--accent3);background:rgba(91,110,245,0.1)}
+.docs-content{padding:40px 48px 80px;max-width:780px}
+.docs-content h1{font-size:36px;font-weight:700;letter-spacing:-1px;margin-bottom:14px}
+.docs-content h2{font-size:22px;font-weight:600;letter-spacing:-0.5px;margin:48px 0 16px;padding-top:48px;border-top:1px solid var(--border)}
+.docs-content h2:first-of-type{border-top:none;padding-top:0}
+.docs-content h3{font-size:16px;font-weight:600;margin:28px 0 12px}
+.docs-content p{font-size:15px;color:var(--text2);line-height:1.8;margin-bottom:16px}
+.docs-content ul{margin:0 0 16px 20px}
+.docs-content ul li{font-size:14px;color:var(--text2);line-height:1.8;margin-bottom:4px}
+.docs-content code{font-family:var(--mono);font-size:13px;background:var(--surface);padding:2px 6px;border-radius:4px;color:var(--accent3)}
+.docs-content pre{background:var(--bg3);border:1px solid var(--border);border-radius:12px;padding:22px 24px;margin:16px 0 24px;overflow-x:auto}
+.docs-content pre code{background:none;padding:0;font-size:13px;line-height:1.9;color:var(--text)}
+.method-badge{display:inline-block;padding:3px 9px;border-radius:5px;font-size:11px;font-weight:600;font-family:var(--mono);margin-right:8px}
+.method-post{background:rgba(52,211,153,0.15);color:#34d399}
+.method-get{background:rgba(147,197,253,0.15);color:#93c5fd}
+.endpoint{font-family:var(--mono);font-size:14px;color:var(--text)}
+.param-table{width:100%;border-collapse:collapse;margin:16px 0 24px;font-size:14px}
+.param-table th{text-align:left;padding:10px 14px;border-bottom:2px solid var(--border2);color:var(--text2);font-weight:500;font-size:12px;text-transform:uppercase;letter-spacing:0.5px}
+.param-table td{padding:10px 14px;border-bottom:1px solid var(--border);color:var(--text2);vertical-align:top}
+.param-table td:first-child{font-family:var(--mono);font-size:13px;color:var(--accent3)}
+.required-badge{font-size:10px;background:rgba(248,113,113,0.15);color:var(--coral);padding:1px 6px;border-radius:3px;margin-left:6px}
+@media(max-width:768px){.docs-layout{grid-template-columns:1fr}.docs-sidebar{display:none}.docs-content{padding:24px}}
+</style>
+</head>
+<body>
+
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="../index.html" class="logo">
+      <div class="logo-mark">M</div>
+      <span class="logo-text">Moa<span class="logo-accent">Pay</span></span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="../index.html#features">기능</a></li>
+      <li><a href="docs.html" style="color:var(--accent3)">문서</a></li>
+      <li><a href="pricing.html">요금제</a></li>
+      <li><a href="demo.html">데모</a></li>
+    </ul>
+    <div class="nav-cta">
+      <a href="login.html" class="btn btn-ghost">로그인</a>
+      <a href="signup.html" class="btn btn-primary">무료 시작 →</a>
+    </div>
+  </div>
+</nav>
+
+<div class="docs-layout">
+  <aside class="docs-sidebar">
+    <h4>시작하기</h4>
+    <a href="#quickstart" class="active">빠른 시작</a>
+    <a href="#install">설치</a>
+    <a href="#auth">인증</a>
+    <h4 id="api">결제 API</h4>
+    <a href="#create-payment">결제 생성</a>
+    <a href="#get-payment">결제 조회</a>
+    <a href="#cancel">취소 / 환불</a>
+    <h4 id="simplePay">간편결제</h4>
+    <a href="#kakaopay">카카오페이</a>
+    <a href="#naverpay">네이버페이</a>
+    <a href="#tosspay">토스페이</a>
+    <h4 id="billing">정기결제</h4>
+    <a href="#billing-key">빌링키 발급</a>
+    <a href="#subscription">구독 관리</a>
+    <h4 id="webhook">웹훅</h4>
+    <a href="#webhook-events">이벤트 목록</a>
+    <a href="#webhook-verify">서명 검증</a>
+    <h4 id="errors">에러 처리</h4>
+    <a href="#error-codes">에러 코드</a>
+    <h4 id="sdk">SDK</h4>
+    <a href="#sdk-node">Node.js</a>
+    <a href="#sdk-python">Python</a>
+    <a href="#sdk-java">Java</a>
+  </aside>
+
+  <div class="docs-content">
+    <h1>API 문서</h1>
+    <p>MoaPay API는 RESTful 방식으로 설계되었습니다. JSON으로 요청하고 JSON으로 응답합니다.</p>
+
+    <h2 id="quickstart">빠른 시작</h2>
+    <p>5분 안에 첫 번째 테스트 결제를 만들어보세요.</p>
+
+    <h3 id="install">1. SDK 설치</h3>
+    <pre><code><span class="cmt"># Node.js</span>
+npm install @moapay/node
+
+<span class="cmt"># Python</span>
+pip install moapay
+
+<span class="cmt"># Java (Maven)</span>
+&lt;dependency&gt;
+  &lt;groupId&gt;dev.moapay&lt;/groupId&gt;
+  &lt;artifactId&gt;moapay-java&lt;/artifactId&gt;
+  &lt;version&gt;1.0.0&lt;/version&gt;
+&lt;/dependency&gt;</code></pre>
+
+    <h3 id="auth">2. API 키 설정</h3>
+    <p>대시보드에서 발급받은 API 키를 환경변수에 저장합니다.</p>
+    <pre><code><span class="cmt"># .env</span>
+<span class="prop">MOA_SECRET_KEY</span>=moa_live_xxxxxxxxxxxxxxxxxxxx
+<span class="prop">MOA_WEBHOOK_SECRET</span>=whsec_xxxxxxxxxxxxxxxxxxxx</code></pre>
+
+    <h2 id="create-payment">결제 생성</h2>
+    <p><span class="method-badge method-post">POST</span><span class="endpoint">/v1/payments</span></p>
+
+    <table class="param-table">
+      <thead><tr><th>파라미터</th><th>타입</th><th>설명</th></tr></thead>
+      <tbody>
+        <tr><td>amount<span class="required-badge">필수</span></td><td>integer</td><td>결제 금액 (원 단위)</td></tr>
+        <tr><td>currency<span class="required-badge">필수</span></td><td>string</td><td>통화 코드. 현재 <code>KRW</code>만 지원</td></tr>
+        <tr><td>method<span class="required-badge">필수</span></td><td>string</td><td><code>card</code> · <code>kakaopay</code> · <code>naverpay</code> · <code>tosspay</code> · <code>bank</code> · <code>phone</code></td></tr>
+        <tr><td>order_id</td><td>string</td><td>가맹점 주문 ID (중복 방지용)</td></tr>
+        <tr><td>customer_id</td><td>string</td><td>구매자 식별자</td></tr>
+        <tr><td>metadata</td><td>object</td><td>자유 형식의 추가 데이터</td></tr>
+      </tbody>
+    </table>
+
+    <pre><code><span class="kw">import</span> Moa <span class="kw">from</span> <span class="str">'@moapay/node'</span>
+<span class="kw">const</span> moa = <span class="kw">new</span> <span class="fn">Moa</span>(process.env.<span class="prop">MOA_SECRET_KEY</span>)
+
+<span class="kw">const</span> payment = <span class="kw">await</span> moa.payments.<span class="fn">create</span>({
+  <span class="prop">amount</span>: <span class="num">15000</span>,
+  <span class="prop">currency</span>: <span class="str">'KRW'</span>,
+  <span class="prop">method</span>: <span class="str">'kakaopay'</span>,
+  <span class="prop">order_id</span>: <span class="str">'order_abc123'</span>,
+  <span class="prop">metadata</span>: { <span class="prop">product_name</span>: <span class="str">'프리미엄 멤버십'</span> }
+})</code></pre>
+
+    <h2 id="webhook-verify">웹훅 서명 검증</h2>
+    <pre><code><span class="cmt">// Next.js App Router</span>
+<span class="kw">import</span> { headers } <span class="kw">from</span> <span class="str">'next/headers'</span>
+
+<span class="kw">export async function</span> <span class="fn">POST</span>(req) {
+  <span class="kw">const</span> body = <span class="kw">await</span> req.<span class="fn">text</span>()
+  <span class="kw">const</span> sig = headers().<span class="fn">get</span>(<span class="str">'moa-signature'</span>)
+
+  <span class="kw">const</span> event = moa.webhooks.<span class="fn">constructEvent</span>(
+    body, sig, process.env.<span class="prop">MOA_WEBHOOK_SECRET</span>
+  )
+
+  <span class="kw">if</span> (event.type === <span class="str">'payment.completed'</span>) {
+    <span class="kw">await</span> <span class="fn">fulfillOrder</span>(event.data.object)
+  }
+
+  <span class="kw">return</span> Response.<span class="fn">json</span>({ <span class="prop">received</span>: <span class="kw">true</span> })
+}</code></pre>
+
+    <h2 id="error-codes">에러 코드</h2>
+    <p>MoaPay의 에러 메시지는 원인과 해결 방법을 포함합니다.</p>
+    <table class="param-table">
+      <thead><tr><th>코드</th><th>설명</th><th>해결 방법</th></tr></thead>
+      <tbody>
+        <tr><td>card_declined</td><td>카드사 거절</td><td>고객에게 다른 카드를 시도하도록 안내</td></tr>
+        <tr><td>insufficient_funds</td><td>잔액 부족</td><td>고객에게 잔액 확인 요청</td></tr>
+        <tr><td>invalid_card_number</td><td>잘못된 카드 번호</td><td>카드 번호 재입력 요청</td></tr>
+        <tr><td>expired_card</td><td>만료된 카드</td><td>유효기간 확인 또는 새 카드 등록</td></tr>
+        <tr><td>duplicate_order_id</td><td>중복 주문 ID</td><td>고유한 order_id 사용</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<script src="../js/main.js"></script>
+</body>
+</html>

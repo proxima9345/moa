@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>요금제 — MoaPay</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/main.css">
+<style>
+.pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:880px;margin:56px auto 0}
+.price-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:32px;display:flex;flex-direction:column}
+.price-card.featured{border-color:var(--accent);background:rgba(91,110,245,0.05)}
+.popular-badge{display:inline-block;padding:4px 12px;background:var(--accent);border-radius:100px;font-size:11px;color:#fff;margin-bottom:14px;width:fit-content}
+.price-name{font-size:14px;font-weight:500;color:var(--text2);margin-bottom:12px}
+.price-amount{font-size:38px;font-weight:700;letter-spacing:-1.5px;margin-bottom:4px}
+.price-amount span{font-size:16px;color:var(--text2);font-weight:400}
+.price-desc{font-size:14px;color:var(--text3);line-height:1.6;margin-bottom:24px}
+.price-features{list-style:none;margin-bottom:32px;flex:1}
+.price-features li{font-size:14px;color:var(--text2);padding:8px 0;border-bottom:1px solid var(--border);display:flex;align-items:flex-start;gap:10px}
+.price-features li::before{content:'✓';color:var(--green);font-weight:700;font-size:12px;margin-top:2px;flex-shrink:0}
+.price-btn{width:100%;padding:13px;border-radius:9px;font-size:14px;font-weight:500;cursor:pointer;transition:all .2s;font-family:'Noto Sans KR',sans-serif;margin-top:auto}
+.price-btn-outline{background:transparent;border:1px solid var(--border2);color:var(--text)}
+.price-btn-outline:hover{border-color:var(--accent);color:var(--accent3)}
+.price-btn-filled{background:var(--accent);border:1px solid transparent;color:#fff}
+.price-btn-filled:hover{background:var(--accent2);transform:translateY(-1px)}
+.faq{max-width:680px;margin:80px auto 0}
+.faq-title{font-size:26px;font-weight:700;letter-spacing:-0.5px;margin-bottom:32px;text-align:center}
+.faq-item{border-bottom:1px solid var(--border);padding:20px 0}
+.faq-q{font-size:15px;font-weight:500;margin-bottom:10px}
+.faq-a{font-size:14px;color:var(--text2);line-height:1.8}
+@media(max-width:720px){.pricing-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="../index.html" class="logo">
+      <div class="logo-mark">M</div>
+      <span class="logo-text">Moa<span class="logo-accent">Pay</span></span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="../index.html#features">기능</a></li>
+      <li><a href="docs.html">문서</a></li>
+      <li><a href="pricing.html" style="color:var(--accent3)">요금제</a></li>
+      <li><a href="demo.html">데모</a></li>
+    </ul>
+    <div class="nav-cta">
+      <a href="login.html" class="btn btn-ghost">로그인</a>
+      <a href="signup.html" class="btn btn-primary">무료 시작 →</a>
+    </div>
+  </div>
+</nav>
+
+<div class="page-hero" style="text-align:center">
+  <div class="container">
+    <span class="section-label">요금제</span>
+    <h1 class="page-title">성장에 맞는 플랜</h1>
+    <p class="page-sub">추가 비용 없이 결제 성공 시에만 수수료를 냅니다.</p>
+  </div>
+</div>
+
+<div class="container" style="padding-bottom:80px">
+  <div class="pricing-grid">
+    <div class="price-card">
+      <div class="price-name">스타터</div>
+      <div class="price-amount">0원<span>/월</span></div>
+      <div class="price-desc">개인 개발자 및 소규모 프로젝트를 위한 플랜</div>
+      <ul class="price-features">
+        <li>카드 수수료 2.5%</li>
+        <li>간편결제 수수료 1.5%</li>
+        <li>월 5,000만원 한도</li>
+        <li>기본 웹훅 지원</li>
+        <li>커뮤니티 지원</li>
+      </ul>
+      <a href="signup.html" class="price-btn price-btn-outline">무료 시작</a>
+    </div>
+
+    <div class="price-card featured">
+      <div class="popular-badge">인기</div>
+      <div class="price-name">비즈니스</div>
+      <div class="price-amount">99,000원<span>/월</span></div>
+      <div class="price-desc">빠르게 성장하는 스타트업과 커머스를 위한 플랜</div>
+      <ul class="price-features">
+        <li>카드 수수료 1.5%</li>
+        <li>간편결제 수수료 0.9%</li>
+        <li>한도 없음</li>
+        <li>정기결제 & 구독 관리</li>
+        <li>실시간 대시보드</li>
+        <li>Slack · 이메일 알림</li>
+        <li>세금계산서 자동 발행</li>
+        <li>우선 지원 (24시간)</li>
+      </ul>
+      <a href="signup.html" class="price-btn price-btn-filled">지금 시작</a>
+    </div>
+
+    <div class="price-card">
+      <div class="price-name">엔터프라이즈</div>
+      <div class="price-amount">협의<span></span></div>
+      <div class="price-desc">대규모 트래픽과 맞춤 요구사항이 있는 기업</div>
+      <ul class="price-features">
+        <li>수수료 개별 협의</li>
+        <li>전용 서버 구성</li>
+        <li>전담 개발 지원</li>
+        <li>SLA 99.99% 보장</li>
+        <li>화이트라벨 결제창</li>
+        <li>전화 지원 (365일)</li>
+      </ul>
+      <a href="mailto:enterprise@moapay.dev" class="price-btn price-btn-outline">문의하기</a>
+    </div>
+  </div>
+
+  <div class="faq">
+    <div class="faq-title">자주 묻는 질문</div>
+    <div class="faq-item">
+      <div class="faq-q">수수료는 언제 부과되나요?</div>
+      <div class="faq-a">결제가 성공적으로 완료될 때만 수수료가 발생합니다. 실패한 결제나 테스트 결제에는 수수료가 없습니다.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">스타터에서 비즈니스로 언제든 업그레이드할 수 있나요?</div>
+      <div class="faq-a">네, 대시보드에서 언제든지 플랜을 변경할 수 있습니다. 업그레이드 시 일할 계산으로 처리됩니다.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">환불이나 취소 시 수수료는 어떻게 되나요?</div>
+      <div class="faq-a">환불 시 결제 수수료는 반환되지 않습니다. 다만 환불 자체에는 별도 수수료가 없습니다.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">계약 기간이 있나요?</div>
+      <div class="faq-a">없습니다. 월 단위 구독이며 언제든지 해지할 수 있습니다.</div>
+    </div>
+  </div>
+</div>
+
+<script src="../js/main.js"></script>
+</body>
+</html>

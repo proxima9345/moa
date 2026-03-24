@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>회원가입 — MoaPay</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/main.css">
+<style>
+.auth-layout{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:40px 24px}
+.auth-card{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:40px;width:100%;max-width:420px}
+.auth-logo{display:flex;align-items:center;gap:10px;justify-content:center;margin-bottom:32px}
+.auth-title{font-size:22px;font-weight:700;text-align:center;margin-bottom:8px}
+.auth-sub{font-size:14px;color:var(--text2);text-align:center;margin-bottom:28px}
+.form-group{margin-bottom:16px}
+.form-label{font-size:13px;color:var(--text2);display:block;margin-bottom:6px;font-weight:500}
+.form-input{width:100%;padding:11px 14px;background:var(--bg3);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:14px;font-family:'Noto Sans KR',sans-serif;outline:none;transition:border .2s}
+.form-input:focus{border-color:var(--accent)}
+.form-input::placeholder{color:var(--text3)}
+.submit-btn{width:100%;padding:13px;background:var(--accent);border:none;border-radius:9px;color:#fff;font-size:15px;font-weight:600;cursor:pointer;transition:all .2s;font-family:'Noto Sans KR',sans-serif;margin-top:8px}
+.submit-btn:hover{background:var(--accent2);transform:translateY(-1px)}
+.divider{display:flex;align-items:center;gap:12px;margin:20px 0;color:var(--text3);font-size:12px}
+.divider::before,.divider::after{content:'';flex:1;height:1px;background:var(--border)}
+.auth-footer{text-align:center;margin-top:20px;font-size:14px;color:var(--text2)}
+.auth-footer a{color:var(--accent2)}
+.terms-note{font-size:12px;color:var(--text3);text-align:center;line-height:1.7;margin-top:16px}
+.terms-note a{color:var(--accent2)}
+</style>
+</head>
+<body>
+
+<div class="auth-layout">
+  <div class="auth-card">
+    <div class="auth-logo">
+      <div class="logo-mark">M</div>
+      <span class="logo-text">Moa<span class="logo-accent">Pay</span></span>
+    </div>
+    <div class="auth-title">무료로 시작하세요</div>
+    <div class="auth-sub">신용카드 없이, 계약서 없이</div>
+
+    <form onsubmit="handleSignup(event)">
+      <div class="form-group">
+        <label class="form-label">이름</label>
+        <input type="text" class="form-input" placeholder="홍길동" required>
+      </div>
+      <div class="form-group">
+        <label class="form-label">이메일</label>
+        <input type="email" class="form-input" placeholder="you@example.com" required>
+      </div>
+      <div class="form-group">
+        <label class="form-label">비밀번호</label>
+        <input type="password" class="form-input" placeholder="8자 이상" minlength="8" required>
+      </div>
+      <div class="form-group">
+        <label class="form-label">회사명 (선택)</label>
+        <input type="text" class="form-input" placeholder="(주)스타트업">
+      </div>
+      <button type="submit" class="submit-btn" id="signupBtn">계정 만들기 →</button>
+    </form>
+
+    <div class="terms-note">
+      가입하면 <a href="#">이용약관</a>과 <a href="#">개인정보처리방침</a>에 동의합니다.
+    </div>
+
+    <div class="auth-footer">
+      이미 계정이 있으신가요? <a href="login.html">로그인</a>
+    </div>
+  </div>
+</div>
+
+<script src="../js/main.js"></script>
+<script>
+function handleSignup(e) {
+  e.preventDefault();
+  const btn = document.getElementById('signupBtn');
+  btn.textContent = '처리 중...';
+  btn.disabled = true;
+  setTimeout(() => {
+    alert('🎉 가입이 완료되었습니다!\n\n실제 서비스 연동 시 대시보드로 이동합니다.');
+    btn.textContent = '계정 만들기 →';
+    btn.disabled = false;
+  }, 1200);
+}
+</script>
+</body>
+</html>
