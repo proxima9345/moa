@@ -27,7 +27,7 @@ moapay/
 ### 1단계 — GitHub 저장소 만들기
 
 1. [github.com/new](https://github.com/new) 접속
-2. Repository name: `moapay` (또는 원하는 이름)
+2. Repository name: `moa` (또는 원하는 이름)
 3. **Public** 선택 (GitHub Pages 무료 사용 조건)
 4. **Create repository** 클릭
 
